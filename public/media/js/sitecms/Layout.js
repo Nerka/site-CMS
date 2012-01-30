@@ -32,7 +32,7 @@ dojo.declare('sitecms.Layout', dijit.layout.BorderContainer,
     
     createMenuSideBar:function()
     {
-        this.menuSideBar = new dijit.layout.ContentPane({splitter:true, region:'leading'});
+        this.menuSideBar = new dijit.layout.ContentPane({splitter:true, region:'leading', style:'width:200px;'});
         dojo.place(this.menuSideBar.domNode, this.domNode, 'first');
         this.createNodeForTree();
     },
@@ -66,7 +66,7 @@ dojo.declare('sitecms.Layout', dijit.layout.BorderContainer,
     createMenuTree:function()
     {   
         var self = this;
-        this.menuTree = new dijit.Tree({
+        this.menuTree = new sitecms.Tree({
             model: self.treeModel,
             showRoot: false 
         }, this.treeNode);   
