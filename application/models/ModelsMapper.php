@@ -23,9 +23,15 @@ class Application_Model_ModelsMapper
         return $this->_dbTable;
     }   
     
-    public function getModelsObjects()
+    public function getModels()
     {
         $models = $this->getDbTable()->fetchAll($this->getDbTable()->select());
+        return $models;   
+    }
+    
+    public function getModelsObjects()
+    {
+        $models = $this->getModels();
         $arrayOfObjects = array();
         
         foreach ($models as $model):
@@ -33,7 +39,30 @@ class Application_Model_ModelsMapper
             $arrayOfObjects[] = $modelObject;
         endforeach;
         
-        return $modelObject;
+        return $arrayOfObjects;
+    }
+    
+    public function getModelsArrays()
+    {
+        $models = $this->getModels();
+        $arrayOfArrays = array();
+        
+        foreach($models as $model):
+            $arrayOfArrays[] = $model->toArray(); 
+        endforeach;
+        
+        return $arrayOfArrays;
+    }
+    
+    public function getModelsDojoData()
+    {
+        $models = $this->getModelsArrays();
+        $data = new Zend_Dojo_Data();
+        $data->setIdentifier('id')
+        ->setLabel('name')
+        ->addItems($models);
+        
+        return $data;
     }
 }
 ?>
