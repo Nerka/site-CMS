@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Keiciu.lt</title>
+
+<?php echo $this->headTitle() ?>
+
+<?php echo $this->headMeta() ?>
+
+<?php echo $this->headLink() ?>
+
+<?php echo $this->headStyle() ?>
+<?php
+    $this->dojo()->enable()->setDjConfigOption('parseOnLoad', true)->setDjConfigOption('isDebug', true);
+?>
+
+<?php if ($this->dojo()->isEnabled())
+{
+	$this->dojo()->setLocalPath('/media/js/dojo/dojo.js')
+	->addStyleSheetModule('dijit.themes.claro');
+	echo $this->dojo();
+}
+?>
+
+<?php echo $this->headScript();  ?>
+
+<link rel="stylesheet" href="/media/css/sitecms.css" />
+<script type="text/javascript" src="/media/js/sitecms/sitecms.js"></script>
+</head>
+<body class="claro">
+    <div class="notLoggedLayoutContainer">
+        <div>
+            <div class="logo"></div>
+        </div>
+        <?php echo $this->layout()->content ?>
+    </div>
+</body>
+</html>
