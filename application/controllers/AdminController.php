@@ -11,18 +11,40 @@ class AdminController extends Zend_Controller_Action
         $user = new Application_Model_User();
         if(!$user->loggedIn())
             $this->_redirect('/admin/login');
-        else 
-            $this->_helper->layout()->setLayout('notlogged');
     }
-    
 
     public function loginAction()
     {
-        $this->view->loginForm = new Application_Form_LoginForm();
+        $this->_helper->layout()->setLayout('notlogged');
+        
+        $loginForm = new Application_Form_LoginForm();
+        $user = new Application_Model_User();
+        
+        if ($this->getRequest()->isPost())
+        {
+            if ($loginForm->isValid($this->getRequest()->getPost()))
+            {
+                $request = $this->getRequest();
+                $authentication = $user->authenticateUser($request->getParam('email'), $request->getParam('password'));
+            
+                if(!$authentication)
+                {
+                    $loginForm->getElement('email')->setValue($loginForm->getValue('email'));
+                    $loginForm->getElement('password')->setValue('');
+                    $this->view->authenticationMessage = "Wrong username or password provided. Please try again.";
+                }
+                else
+                    $this->_redirect('/admin/');
+            }   
+        } 
+        
+        $this->view->loginForm = $loginForm;
     }
     
     public function registerAction()
     {
+        $this->_helper->layout()->setLayout('notlogged');
+        
         $registrationForm = new Application_Form_RegisterForm();
         
         $validator = new Zend_Validate_Db_RecordExists(
@@ -44,9 +66,29 @@ class AdminController extends Zend_Controller_Action
                     $userMapper->saveUser($user);
                     
                     $user->authenticateUser($user->getEmail(), $user->getPassword());
-                    $this->_redirect('/');
+                    $this->_redirect('/admin/');
                 }
             }
         }
+    }
+    
+    public function indexAction()
+    {
+        
+    }
+    
+    public function modelsAction()
+    {
+        $this->_helper->layout->disableLayout();
+//        $this->_helper->viewRender->setNoRender(true);
+        $modelsMapper = new Application_Model_ModelsMapper();
+        $models = $modelsMapper->getModelsObjects();
+        var_dump($models);
+    }
+
+    public function logoutAction()
+    {
+        Zend_Auth::getInstance()->clearIdentity();
+        $this->_redirect('/admin/login');
     }
 }

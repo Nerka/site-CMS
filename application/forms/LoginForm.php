@@ -10,6 +10,7 @@ class Application_Form_LoginForm extends Zend_Dojo_Form
     {
         $this->setName('loginForm');
         $this->setMethod('post');
+        $this->setAction('/admin/login');
         
         $this->addElement('ValidationTextBox', 'email', array(
             'validators'    =>  array('EmailAddress'),
@@ -29,7 +30,8 @@ class Application_Form_LoginForm extends Zend_Dojo_Form
         $this->addElement('button', 'register', array(
             'label'         =>	'Login',
             'decorators'    =>	$this->buttonDecorators,
-            'baseClass'     =>  'siteCMSButtons'
+            'baseClass'     =>  'siteCMSButtons',
+            'type'          =>  'submit'
         ));
     }
 }

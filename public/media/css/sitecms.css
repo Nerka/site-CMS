@@ -2,8 +2,12 @@ root {
     display: block;
 }
 
-body{
+body, html{
     font-family: calibri;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
 form dt{
@@ -80,4 +84,13 @@ dl{
 
 .siteCMSButtons .dijitButtonText{
     vertical-align: top;
+}
+
+.errorMessage{
+    color: #fe4456;
+}
+
+.siteCMSLayout{
+    width: 100%;
+    height: 100%;
 }
