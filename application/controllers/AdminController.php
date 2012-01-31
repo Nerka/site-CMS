@@ -84,6 +84,14 @@ class AdminController extends Zend_Controller_Action
         $models = $modelsMapper->getModelsDojoData();
         echo $models;
     }
+    
+    public function pagesAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $modelsMapper = new Application_Model_ModelsMapper();
+        $models = $modelsMapper->getModelsSystem();
+//        var_dump($models);
+    }
 
     public function logoutAction()
     {

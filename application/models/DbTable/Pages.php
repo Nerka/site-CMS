@@ -1,8 +1,7 @@
 <?php
-class Application_Model_DBTable_Models extends Zend_Db_Table_Abstract
+class Application_Model_DBTable_Pages extends Zend_Db_Table_Abstract
 {
-    protected $_name = 'models';
-    protected $_rowClass = 'Application_Model_Row_Models';
+    protected $_name = 'pages';
     protected $_referenceMap = array(
     'System' => array(
         'columns'       => 'system_id', 

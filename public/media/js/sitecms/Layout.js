@@ -54,7 +54,9 @@ dojo.declare('sitecms.Layout', dijit.layout.BorderContainer,
     {
         var self = this
         this.treeModel = new dijit.tree.ForestStoreModel({
-            store: self.menuStore
+            store: self.menuStore,
+            query: {"type": "module"},
+            childrenAttrs: ["children"]
         });  
     },
     
@@ -68,7 +70,11 @@ dojo.declare('sitecms.Layout', dijit.layout.BorderContainer,
         var self = this;
         this.menuTree = new sitecms.Tree({
             model: self.treeModel,
-            showRoot: false 
+            showRoot: false,
+            onClick:function(item)
+            {
+                self.contentContainer.set('href', item.url);   
+            }
         }, this.treeNode);   
     },
     
@@ -76,7 +82,7 @@ dojo.declare('sitecms.Layout', dijit.layout.BorderContainer,
     {
         var self = this;
         dojo.xhrPost({
-            url:'/admin/models',
+            url: '/admin/models',
             handleAs: 'json',
             load:function(data)
             {

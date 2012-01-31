@@ -46,9 +46,24 @@ class Application_Model_ModelsMapper
     {
         $models = $this->getModels();
         $arrayOfArrays = array();
-        
+
         foreach($models as $model):
-            $arrayOfArrays[] = $model->toArray(); 
+            $methods = get_class_methods($model->getSystem());
+            $modelAsArray = $model->toArray();
+            $method = 'get' . ucfirst($model->name);
+            $childrenArray = array();
+            if(in_array($method, $methods))
+            {
+                foreach ($model->getSystem()->$method() as $page):
+                    $childrenArray[] = array('_reference' => $page->id);
+                    $arrayOfArrays[] = $page->toArray();
+                endforeach;
+                $modelAsArray['children'] =  $childrenArray;
+            }
+                
+            $modelAsArray['type'] =  'module';
+            $arrayOfArrays[] = $modelAsArray; 
+            
         endforeach;
         
         return $arrayOfArrays;
@@ -63,6 +78,19 @@ class Application_Model_ModelsMapper
         ->addItems($models);
         
         return $data;
+    }
+    
+    public function getModelsSystem()
+    {
+        $models = $this->getModels();
+        return $models->current()->getSystem();
+    }
+    
+    public function getModelsChildrens()
+    {
+        $system = $this->getModelsSystem();
+        $children = $system->getPages()->toArray();
+        return $children;
     }
 }
 ?>
