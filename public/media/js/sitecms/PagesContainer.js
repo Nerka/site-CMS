@@ -5,6 +5,7 @@ dojo.require('dijit._TemplatedMixin');
 
 
 dojo.require('sitecms.PageLine');
+dojo.require('sitecms.PageCreationForm');
 dojo.require('sitecms.Dialog');
 
 dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin], 
@@ -13,6 +14,7 @@ dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin],
     
     pages: null,
     contentContainer: null,
+    pageCreationForm: null,
     
     postCreate:function()
     {
@@ -35,11 +37,18 @@ dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin],
     
     toCreateNewPage: function()
     {
-        this.createDialog();
+        var dialogCMS = new sitecms.Dialog();
+        this.createPageCreationForm();
+        dialogCMS.setContent(this.pageCreationForm.domNode);
     },
     
     createDialog: function()
     {
-        var dialog = new sitecms.Dialog();
+        
+    },
+    
+    createPageCreationForm:function()
+    {
+       this.pageCreationForm = new sitecms.PageCreationForm();
     }
 });

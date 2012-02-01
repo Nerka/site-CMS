@@ -199,3 +199,7 @@ dl{
     display: inline-block;
     vertical-align: middle;
 }
+
+.contentPane{
+    text-align: left;
+}

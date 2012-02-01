@@ -1,24 +1,20 @@
 dojo.provide('sitecms.Dialog');
 
-dojo.require('dojox.layout.ContentPane');
-
+dojo.require('dijit.layout.ContentPane');
 dojo.require('dijit._Widget');
-dojo.require('dijit._TemplatedMixin');
+dojo.require('dijit._Templated');
 
-dojo.declare('sitecms.Dialog', [dijit._Widget, dijit._TemplatedMixin], 
+dojo.declare('sitecms.Dialog', [dijit._Widget, dijit._Templated], 
 {
     templateString: dojo.cache("sitecms.Dialog", "templates/Dialog.html"),
-    widgetsInTemplate:true,
+    widgetsInTemplate: true,
     
     href:'',
-    content: '',
     
     postCreate: function()
     {
         dojo.place(this.domNode, dojo.body());
         dojo.connect(this.overlay, 'onclick', this, 'destroyDialog');
-        if(this.href)
-            this.setContentPaneHref();
     },
     
     setContentPaneHref: function()
@@ -29,5 +25,10 @@ dojo.declare('sitecms.Dialog', [dijit._Widget, dijit._TemplatedMixin],
     destroyDialog:function()
     {
         this.destroyRecursive();
+    },
+    
+    setContent: function(element)
+    {
+        dojo.place(element, this.contentPane.domNode, 'first');
     }
 });
