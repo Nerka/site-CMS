@@ -158,3 +158,44 @@ dl{
     margin-bottom: 15px;
     margin-top:5px;
 }
+
+.dialogContainer{
+    overflow: auto;
+    padding: 20px;
+}
+
+.dialogContainer, .dialogOverlay{
+    top:0px;
+    left:0px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align: center;
+}
+
+.dialogOverlay{
+    background-color: #000;
+    opacity:0.5;
+}
+
+.dialogContainer .contentPane{
+    background: #fff;
+    -webkit-box-shadow: -3px 0px 3px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: -3px 0px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: -3px 0px 3px rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    position: absolute;
+    width: 90%;
+    top:0px;
+    right: 0px;
+    height: 100%;
+    z-index: 999;
+    vertical-align: middle;
+}
+
+.fakeDialogDiv{
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}

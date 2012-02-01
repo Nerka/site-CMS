@@ -3,7 +3,9 @@ dojo.provide('sitecms.PagesContainer');
 dojo.require('dijit._Widget');
 dojo.require('dijit._TemplatedMixin');
 
+
 dojo.require('sitecms.PageLine');
+dojo.require('sitecms.Dialog');
 
 dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin], 
 {
@@ -16,7 +18,7 @@ dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin],
     {
        this.contentContainer = this.getParent();
        this.createPages();
-       dojo.connect(this.createNewNode, 'onClick', this, 'toCreateNewPage');
+       dojo.connect(this.createNewNode, 'onclick', this, 'toCreateNewPage');
     },
     
     createPages:function()
@@ -33,6 +35,11 @@ dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin],
     
     toCreateNewPage: function()
     {
-        
+        this.createDialog();
+    },
+    
+    createDialog: function()
+    {
+        var dialog = new sitecms.Dialog();
     }
 });
