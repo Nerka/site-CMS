@@ -74,7 +74,8 @@ class AdminController extends Zend_Controller_Action
     
     public function indexAction()
     {
-        
+        $userData = Zend_Auth::getInstance()->getStorage()->read();
+        $this->view->userData = json_encode($userData);
     }
     
     public function modelsAction()
@@ -88,9 +89,10 @@ class AdminController extends Zend_Controller_Action
     public function pagesAction()
     {
         $this->_helper->layout->disableLayout();
+        Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
         $modelsMapper = new Application_Model_ModelsMapper();
-        $models = $modelsMapper->getModelsSystem();
-//        var_dump($models);
+        $pages = $modelsMapper->getModelsSystem()->getPages();
+        $this->view->pages = json_encode($pages->toArray());
     }
 
     public function logoutAction()
