@@ -49,6 +49,7 @@ dojo.declare('sitecms.PagesContainer', [dijit._Widget, dijit._TemplatedMixin],
     
     createPageCreationForm:function()
     {
-       this.pageCreationForm = new sitecms.PageCreationForm();
+        var self = this;
+        this.pageCreationForm = new sitecms.PageCreationForm({contentContainer: self.contentContainer});
     }
 });

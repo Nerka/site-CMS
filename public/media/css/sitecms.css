@@ -203,3 +203,24 @@ dl{
 .contentPane{
     text-align: left;
 }
+
+.dijitTabListContainer-top{
+    min-width: 700px !important;
+    min-height: 37px !important;
+}
+
+.dijitTabListWrapper{
+    min-width: 700px !important;
+    min-height: 37px !important; 
+}
+
+.dijitTabListWrapper >:first-child{
+    min-width: 700px !important;
+}
+
+.pageNameNode{
+    margin: 5px 0px 15px 0px;
+    text-align: center;
+    font-size: 20px;
+    height: 28px;
+}

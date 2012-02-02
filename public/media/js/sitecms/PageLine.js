@@ -21,7 +21,7 @@ dojo.declare('sitecms.PageLine', [dijit._Widget, dijit._TemplatedMixin],
         this.pageTitle.innerHTML = this.pageData.name;
         var self = this;
         dojo.connect(this.removePageIcon, 'onclick', function(e){dojo.stopEvent(e); self.removePage()});
-        dojo.connect(this, 'onClick', this, 'openPage')
+        dojo.connect(this, 'onClick', this, 'openPage');
     },
     
     openPage: function()
@@ -33,7 +33,8 @@ dojo.declare('sitecms.PageLine', [dijit._Widget, dijit._TemplatedMixin],
     {
         var self = this;
         dojo.xhrPost({
-            url:'/admin/removepage?id=' + self.pageData.id,
+            url:'/admin/removepage',
+            content:{id: self.pageData.id},
             load:function()
             {
                 self.destroyRecursive();

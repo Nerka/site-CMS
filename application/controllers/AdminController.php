@@ -94,6 +94,42 @@ class AdminController extends Zend_Controller_Action
         $pages = $modelsMapper->getModelsSystem()->getPages();
         $this->view->pages = json_encode($pages->toArray());
     }
+    
+    public function savepageAction()
+    {
+        $this->_helper->layout->disableLayout();
+        $userData = Zend_Auth::getInstance()->getStorage()->read();
+        if ($this->getRequest()->isPost())
+        {
+            $date = new Zend_Date();
+            $date = $date->get('yyyy-MM-dd HH:mm:ss');
+            $page = new Application_Model_Page($this->getRequest()->getParams());
+            $page->setUsers_id($userData->id)
+                 ->setSystem_id($userData->system_id)
+                 ->setCreatedat($date);
+            
+            $pageMapper = new Application_Model_PageMapper();
+            $lastId = $pageMapper->createPage($page);
+            
+            echo json_encode(array(
+                    'pageId'    => $lastId, 
+                    'name'      => $page->getName(), 
+                    'createdat' => $page->getCreatedat()
+                    ));
+        }
+    }
+    
+    public function removepageAction()
+    {
+        if ($this->getRequest()->isPost())
+        {
+            if($this->getRequest()->getParam('id'))
+            {
+                $pageMapper = new Application_Model_PageMapper();
+                $pageMapper->removePage($this->getRequest()->getParam('id'));
+            }
+        }
+    }
 
     public function logoutAction()
     {
