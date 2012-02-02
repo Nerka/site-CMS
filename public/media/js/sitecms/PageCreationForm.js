@@ -121,11 +121,19 @@ dojo.declare('sitecms.PageCreationForm', [dijit._Widget, dijit._Templated],
             },
             load:function(data)
             {
-                if(data.pageId != null)
+                if(data.id != null)
                 {
-                    self.pageId = data.pageId;
+                    self.pageId = data.id;
                     self.page = new sitecms.PageLine({pageData: data});
                     dojo.place(self.page.domNode, self.contentContainer.domNode, 'last');
+                }
+                else
+                {
+                    if(self.page != null)
+                    {
+                        self.page.createdAt.innerHTML = data.createdat;
+                        self.page.pageTitle.innerHTML = data.name;
+                    }
                 }
             }             
         });

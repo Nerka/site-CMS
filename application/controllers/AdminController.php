@@ -112,10 +112,10 @@ class AdminController extends Zend_Controller_Action
             $lastId = $pageMapper->createPage($page);
             
             echo json_encode(array(
-                    'pageId'    => $lastId, 
+                    'id'    => $lastId, 
                     'name'      => $page->getName(), 
                     'createdat' => $page->getCreatedat()
-                    ));
+                ));
         }
     }
     
