@@ -137,6 +137,13 @@ dojo.declare('sitecms.PageCreationForm', [dijit._Widget, dijit._Templated],
                 }
             }             
         });
+    }, 
+    
+    saveTranslates: function()
+    {
+        
     }
+    
+    
     
 });
