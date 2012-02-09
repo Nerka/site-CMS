@@ -6,6 +6,7 @@ dojo.require('dijit._Templated');
 dojo.require('sitecms.TabContainer');
 dojo.require('sitecms.PageForm');
 dojo.require('sitecms.PageLine');
+dojo.require('sitecms.LanguageTab');
 
 dojo.require('dijit.InlineEditBox');
 dojo.require('dijit.layout.ContentPane');
@@ -94,9 +95,10 @@ dojo.declare('sitecms.PageCreationForm', [dijit._Widget, dijit._Templated],
         var self = this;
         dojo.forEach(this.defaultLanguages, function(language){
             var pageForm = new sitecms.PageForm();
-            var tab = new dijit.layout.ContentPane({
+            var tab = new sitecms.LanguageTab({
                 title: language.title,
-                content: pageForm
+                content: pageForm,
+                laguageId:language.id
             });
             self.tabContainer.addChild(tab);
         });
@@ -137,13 +139,5 @@ dojo.declare('sitecms.PageCreationForm', [dijit._Widget, dijit._Templated],
                 }
             }             
         });
-    }, 
-    
-    saveTranslates: function()
-    {
-        
-    }
-    
-    
-    
+    }        
 });
